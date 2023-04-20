@@ -7,7 +7,7 @@ import PostPage from "./components/PostPage.js";
 import About from "./components/About.js";
 import Missing from "./components/Missing.js";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const nevigate = useNavigate();
@@ -45,7 +45,17 @@ function App() {
   ]);
 
   const [search, setSearch] = useState('');
-  // const [searchResults, setSearchResults] = useState(posts);
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    const filteredPosts = posts.filter(post =>
+      (post.body).toLowerCase().includes(search)
+      || (post.title).toLowerCase().includes(search)
+    );
+
+    setSearchResults(filteredPosts.reverse());
+
+  }, [posts, search])
 
   const handleDelete = (id) => {
     const newPosts = posts.filter((post) => post.id !== id);
@@ -59,7 +69,7 @@ function App() {
       <Nav search={search} setSearch={setSearch} />
       <Routes>
 
-        <Route path="/" element={<Home posts={posts} />} />
+        <Route path="/" element={<Home posts={searchResults} />} />
 
         <Route path="/post" element={<NewPost />} />
 
