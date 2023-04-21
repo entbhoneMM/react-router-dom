@@ -5,7 +5,7 @@ const PostPage = ({ posts, handleDelete }) => {
   const { id } = useParams();
   const post = posts.find(post => (post.id).toString() === id);
   return (
-    <article className='mt-3 ms-3'>
+    <article className='mt-3 ms-3 flex-fill'>
       {
         post &&
         <>
