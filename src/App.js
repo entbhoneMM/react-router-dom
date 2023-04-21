@@ -8,6 +8,7 @@ import About from "./components/About.js";
 import Missing from "./components/Missing.js";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { format } from "date-fns";
 
 function App() {
   const nevigate = useNavigate();
@@ -44,8 +45,11 @@ function App() {
     }
   ]);
 
+  console.log(posts)
+
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [formData, setFormData] = useState({ title: '', body: '' });
 
   useEffect(() => {
     const filteredPosts = posts.filter(post =>
@@ -63,6 +67,29 @@ function App() {
     nevigate('/');
   }
 
+  const handleChange = (e) => {
+    setFormData(prevState => {
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value
+      };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
+    const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+    const newPost = { id, datetime, title: formData.title, body: formData.body };
+    setPosts(prevState => {
+      return [
+        ...posts,
+        newPost
+      ];
+    });
+    nevigate('/');
+  }
+
   return (
     <div className="App">
       <Header />
@@ -71,7 +98,16 @@ function App() {
 
         <Route path="/" element={<Home posts={searchResults} />} />
 
-        <Route path="/post" element={<NewPost />} />
+        <Route
+          path="/post"
+          element={
+            <NewPost
+              newPostData={formData}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+            />
+          }
+        />
 
         <Route path="/post/:id" element={<PostPage posts={posts} handleDelete={handleDelete} />} />
 
