@@ -26,27 +26,15 @@
     },
     {
       "id": 5,
-      "title": "My fifth post",
+      "title": "My fifth post  Edit",
       "datetime": "April 20,2023 08: 16: 06 PM",
       "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium omnis non neque ex asperiores voluptates odio ad quia voluptatibus, nesciunt deserunt nisi atque eaque, optio accusantium labore dolore suscipit. Suscipit."
     },
     {
       "id": 6,
-      "datetime": "April 21, 2023 10:41:14 PM",
-      "title": "this is test",
-      "body": "a quick brown fox jumps over the lazy dog"
-    },
-    {
-      "id": 7,
-      "datetime": "April 21, 2023 10:43:47 PM",
-      "title": "test 1 EDITED",
-      "body": "this is testing one."
-    },
-    {
-      "id": 8,
-      "datetime": "April 21, 2023 10:45:30 PM",
-      "title": "Test 2 EDITED",
-      "body": "this is testing post number two\nTHIS POST IS EDITED WITH EDITER"
+      "datetime": "April 25, 2023 10:12:36 PM",
+      "title": "hello",
+      "body": "this is hello"
     }
   ]
 }

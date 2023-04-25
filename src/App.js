@@ -7,7 +7,7 @@ import PostPage from "./components/PostPage.js";
 import About from "./components/About.js";
 import Missing from "./components/Missing.js";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { format } from "date-fns";
 import api from "./api/posts.js";
 import EditPost from "./components/EditPost.js";
@@ -15,15 +15,19 @@ import EditPost from "./components/EditPost.js";
 function App() {
   const nevigate = useNavigate();
   const [posts, setPosts] = useState([]);
+  const [post, setPost] = useState({ title: '', body: '' });
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [formData, setFormData] = useState({ title: '', body: '' });
+
+  const count = useRef(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await api.get('/posts');
         setPosts(res.data);
+        count.current++
       } catch (err) {
         if (err.response) {
           console.log(err.response.data);
@@ -35,7 +39,7 @@ function App() {
       }
     };
     fetchData();
-  }, []);
+  }, [post]);
 
 
   useEffect(() => {
@@ -117,7 +121,7 @@ function App() {
 
         <Route path="/about" element={<About />} />
 
-        <Route path="/Edit/:id" element={<EditPost />} />
+        <Route path="/Edit/:id" element={<EditPost post={post} setPost={setPost} />} />
 
         <Route path="*" element={<Missing />} />
 
