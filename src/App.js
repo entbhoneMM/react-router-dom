@@ -9,7 +9,8 @@ import Missing from "./components/Missing.js";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
-import api from "./api/posts.js"
+import api from "./api/posts.js";
+import EditPost from "./components/EditPost.js";
 
 function App() {
   const nevigate = useNavigate();
@@ -115,6 +116,9 @@ function App() {
         <Route path="/post/:id" element={<PostPage posts={posts} handleDelete={handleDelete} />} />
 
         <Route path="/about" element={<About />} />
+
+        <Route path="/Edit/:id" element={<EditPost />} />
+
         <Route path="*" element={<Missing />} />
 
       </Routes>

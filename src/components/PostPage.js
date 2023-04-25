@@ -12,8 +12,14 @@ const PostPage = ({ posts, handleDelete }) => {
           <h3>{post.title}</h3>
           <h6 className='text-muted fs-6'>{post.datetime}</h6>
           <p className='.text-warp'>{post.body}</p>
+
+          <Link to={`/edit/${post.id}`} >
+            <button className='btn btn-secondary'>
+              Edit
+            </button>
+          </Link>
           <button
-            className='btn btn-danger'
+            className='btn btn-danger ms-2'
             onClick={() => handleDelete(post.id)}
           >
             Delete
